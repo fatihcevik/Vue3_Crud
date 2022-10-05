@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-6">
       <div v-if="currentTutorial.id">
-        <h4>Tutorial</h4>
+        <h4>Tutorials</h4>
         <div>
           <label><strong>Title:</strong></label> {{ currentTutorial.title }}
         </div>

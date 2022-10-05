@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient= axios.create({
-  baseURL: "https://gorest.co.in/public/v2",
+  baseURL: "http://localhost:8080/api",
   headers: {
     "Content-type": "application/json",
   },

@@ -2,31 +2,31 @@ import http from "@/http-common";
 
 class DataService {
   getAll(): Promise<any> {
-    return http.get("/posts");
+    return http.get("/tutorials");
   }
 
   get(id: any): Promise<any> {
-    return http.get(`/posts/${id}`);
+    return http.get(`/tutorials/${id}`);
   }
 
   create(data: any): Promise<any> {
-    return http.post("/posts", data);
+    return http.post("/tutorials", data);
   }
 
   update(id: any, data: any): Promise<any> {
-    return http.put(`/posts/${id}`, data);
+    return http.put(`/tutorials/${id}`, data);
   }
 
   delete(id: any): Promise<any> {
-    return http.delete(`/posts/${id}`);
+    return http.delete(`/tutorials/${id}`);
   }
 
   deleteAll(): Promise<any> {
-    return http.delete(`/posts`);
+    return http.delete(`/tutorials`);
   }
 
   findByTitle(title: string): Promise<any> {
-    return http.get(`/posts?title=${title}`);
+    return http.get(`/tutorials?title=${title}`);
   }
 }
 
