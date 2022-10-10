@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TutorialDataService from "@/services/DataService";
+import UserService from "@/services/user.service";
 import type TutorialModel from "@/types/TutorialModel";
 import type ResponseDataModel from "@/types/ResponseDataModel";
 
@@ -60,7 +60,7 @@ export default defineComponent({
         description: this.tutorial.description,
       };
 
-      TutorialDataService.create(data)
+      UserService.create(data)
         .then((response: ResponseDataModel) => {
           this.tutorial.id = response.data.id;
           console.log(response.data);

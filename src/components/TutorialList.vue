@@ -2,18 +2,9 @@
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search by title"
-          v-model="title"
-        />
+        <input type="text" class="form-control" placeholder="Search by title" v-model="title" />
         <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            @click="searchTitle"
-          >
+          <button class="btn btn-outline-secondary" type="button" @click="searchTitle">
             Search
           </button>
         </div>
@@ -22,13 +13,8 @@
     <div class="col-md-6">
       <h4>Tutorials List</h4>
       <ul class="list-group">
-        <li
-          class="list-group-item"
-          :class="{ active: index == currentIndex }"
-          v-for="(tutorial, index) in tutorials"
-          :key="index"
-          @click="setActiveTutorial(tutorial, index)"
-        >
+        <li class="list-group-item" :class="{ active: index == currentIndex }" v-for="(tutorial, index) in tutorials"
+          :key="index" @click="setActiveTutorial(tutorial, index)">
           {{ tutorial.title }}
         </li>
       </ul>
@@ -52,11 +38,7 @@
           {{ currentTutorial.published ? "Published" : "Pending" }}
         </div>
 
-        <router-link
-          :to="'/tutorials/' + currentTutorial.id"
-          class="badge badge-warning"
-          >Edit</router-link
-        >
+        <router-link :to="'/tutorials/' + currentTutorial.id" class="badge badge-warning">Edit</router-link>
       </div>
       <div v-else>
         <br />
@@ -68,7 +50,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TutorialDataService from "@/services/DataService";
+import TurorialService from "@/services/tutorial.service";
 import type Tutorial from "@/types/TutorialModel";
 import type ResponseData from "@/types/ResponseDataModel";
 
@@ -84,10 +66,9 @@ export default defineComponent({
   },
   methods: {
     retrieveTutorials() {
-      TutorialDataService.getAll()
+      TurorialService.getAll()
         .then((response: ResponseData) => {
           this.tutorials = response.data;
-          console.log(response.data);
         })
         .catch((e: Error) => {
           console.log(e);
@@ -106,9 +87,8 @@ export default defineComponent({
     },
 
     removeAllTutorials() {
-      TutorialDataService.deleteAll()
+      TurorialService.deleteAll()
         .then((response: ResponseData) => {
-          console.log(response.data);
           this.refreshList();
         })
         .catch((e: Error) => {
@@ -117,11 +97,10 @@ export default defineComponent({
     },
 
     searchTitle() {
-      TutorialDataService.findByTitle(this.title)
+      TurorialService.findByTitle(this.title)
         .then((response: ResponseData) => {
           this.tutorials = response.data;
           this.setActiveTutorial({} as Tutorial);
-          console.log(response.data);
         })
         .catch((e: Error) => {
           console.log(e);

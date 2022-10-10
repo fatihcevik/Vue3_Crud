@@ -55,17 +55,18 @@
   <div v-else>
     <br />
     <p>Please click on a Tutorial...</p>
+    {{currentTutorial}}
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TutorialDataService from "@/services/DataService";
+import TutorialService from "@/services/tutorial.service";
 import type Tutorial from "@/types/TutorialModel";
 import type ResponseData from "@/types/ResponseDataModel";
 
 export default defineComponent({
-  name: "tutorial",
+  name: "tutorial-details",
   data() {
     return {
       currentTutorial: {} as Tutorial,
@@ -74,10 +75,10 @@ export default defineComponent({
   },
   methods: {
     getTutorial(id: any) {
-      TutorialDataService.get(id)
+      TutorialService.get(id)
         .then((response: ResponseData) => {
-          this.currentTutorial = response.data;
           console.log(response.data);
+          this.currentTutorial = response.data;
         })
         .catch((e: Error) => {
           console.log(e);
@@ -92,7 +93,7 @@ export default defineComponent({
         published: status,
       };
 
-      TutorialDataService.update(this.currentTutorial.id, data)
+      TutorialService.update(this.currentTutorial.id, data)
         .then((response: ResponseData) => {
           console.log(response.data);
           this.currentTutorial.published = status;
@@ -104,7 +105,7 @@ export default defineComponent({
     },
 
     updateTutorial() {
-      TutorialDataService.update(this.currentTutorial.id, this.currentTutorial)
+      TutorialService.update(this.currentTutorial.id, this.currentTutorial)
         .then((response: ResponseData) => {
           console.log(response.data);
           this.message = "The tutorial was updated successfully!";
@@ -115,7 +116,7 @@ export default defineComponent({
     },
 
     deleteTutorial() {
-      TutorialDataService.delete(this.currentTutorial.id)
+      TutorialService.delete(this.currentTutorial.id)
         .then((response: ResponseData) => {
           console.log(response.data);
           this.$router.push({ name: "tutorials" });
