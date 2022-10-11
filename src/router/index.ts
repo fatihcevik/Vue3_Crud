@@ -24,7 +24,7 @@ const router = createRouter({
       component: () => import("../components/Register.vue"),
     },
     {
-      path: "/manageusers",
+      path: "/auth/manageusers",
       name: 'manageusers',
       component: () => import("../components/ManageUsers.vue"),
     },
@@ -34,7 +34,7 @@ const router = createRouter({
       component: () => import("../components/UserDetails.vue"),
     },
     {
-      path: "/profile",
+      path: "/users/profile",
       name: 'profile',
       component: () => import("../components/Profile.vue"),
     },
@@ -50,7 +50,7 @@ const router = createRouter({
       component: () => import("../components/TutorialDetails.vue"),
     },
     {
-      path: "/add",
+      path: "/tutorials/add",
       name: "add",
       component: () => import("../components/AddTutorial.vue"),
     }

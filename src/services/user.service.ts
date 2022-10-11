@@ -31,9 +31,9 @@ class UserService {
   }
 
   delete(id: any): Promise<any> {
-    return apiClient.delete(`users/${id}`,{ headers: authHeader() });
+    return apiClient.delete(`users/${id}`, { headers: authHeader() });
   }
-  
+
   findByUserName(username: string): Promise<any> {
     return apiClient.get(`users/${username}`, { headers: authHeader() });
   }

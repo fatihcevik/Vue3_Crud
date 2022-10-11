@@ -9,5 +9,5 @@ import { FontAwesomeIcon } from './plugins/font-awesome'
 const app = createApp(App)
 app.config.globalProperties.$store = store;
 app.use(router).use(store)
-.component("font-awesome-icon", FontAwesomeIcon)
+    .component("font-awesome-icon", FontAwesomeIcon)
 app.mount('#app')

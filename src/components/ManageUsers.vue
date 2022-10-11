@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <button class="btn btn-primary btn-block" :disabled="loading">
                             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                            Register User
+                            Register New User
                         </button>
                     </div>
                 </div>
@@ -33,57 +33,58 @@
                 {{ message }}
             </div>
         </div>
-    </div>
 
-    <div class="list row">
-        <div class="col-md-8">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search by username" v-model="username" />
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" @click="searchUser">
-                        Search
-                    </button>
+        <br />
+        <div class="list row">
+            <div class="col-md-8">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search by username" v-model="username" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" @click="searchUser">
+                            Search
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <h4>User List</h4>
-            <ul class="list-group">
-                <li class="list-group-item" :class="{ active: index == currentIndex }" v-for="(user, index) in userList"
-                    :key="index" @click="setActiveUser(user, index)">
-                    {{ user.username }}
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-6">
-            <div v-if="selectedUser">
-                <h4>Users</h4>
-                <div>
-                    <label><strong>UserName:</strong></label> {{ selectedUser.username }}
-                </div>
-                <div>
-                    <label><strong>Email:</strong></label>
-                    {{ selectedUser.email }}
-                </div>
-                <div>
-                    <label><strong>Password:</strong></label>
-                    {{ selectedUser.password }}
-                </div>
-                <div>
-                    <label><strong>Roles:</strong></label>
-                    <ul class="list-group">
-                        <li class="list-group-item" :class="{ active: index == currentIndex }"
-                            v-for="(role, index) in selectedUserRoleList" :key="index"
-                            @click="setActiveUserRole(role, index)">
-                            {{ role }}
-                        </li>
-                    </ul>
-                </div>
-                <router-link :to="'/users/' + selectedUser._id" class="badge badge-warning">Edit</router-link>
+            <div class="col-md-6">
+                <h4>User List</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" :class="{ active: index == currentIndex }"
+                        v-for="(user, index) in userList" :key="index" @click="setActiveUser(user, index)">
+                        {{ user.username }}
+                    </li>
+                </ul>
             </div>
-            <div v-else>
-                <br />
-                <p>Please click on a User...</p>
+            <div class="col-md-6">
+                <div v-if="selectedUser._id">
+                    <h4>Users</h4>
+                    <div>
+                        <label><strong>UserName:</strong></label> {{ selectedUser.username }}
+                    </div>
+                    <div>
+                        <label><strong>Email:</strong></label>
+                        {{ selectedUser.email }}
+                    </div>
+                    <div>
+                        <label><strong>Password:</strong></label>
+                        {{ selectedUser.password }}
+                    </div>
+                    <div>
+                        <label><strong>Roles:</strong></label>
+                        <ul class="list-group">
+                            <li class="list-group-item" :class="{ active: index == currentIndex }"
+                                v-for="(role, index) in selectedUserRoleList" :key="index"
+                                @click="setActiveUserRole(role, index)">
+                                {{ role }}
+                            </li>
+                        </ul>
+                    </div>
+                    <router-link :to="'/users/' + selectedUser._id" class="badge badge-warning">Edit</router-link>
+                </div>
+                <div v-else>
+                    <br />
+                    <p>Please click on a User...</p>
+                </div>
             </div>
         </div>
     </div>

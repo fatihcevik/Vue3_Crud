@@ -31,7 +31,7 @@ class UserService {
   }
 
   delete(id: any): Promise<any> {
-    return apiClient.delete(`tutorials/${id}`,{ headers: authHeader() });
+    return apiClient.delete(`tutorials/${id}`, { headers: authHeader() });
   }
 
   deleteAll(): Promise<any> {

@@ -1,3 +1,3 @@
 export default interface ResponseDataModel {
-    data: any;
-  }
+  data: any;
+}

@@ -14,26 +14,27 @@ export default defineComponent({
   name: "Home",
   data() {
     return {
-      content: ""
+      content: "This is Home Page"
     };
   },
   mounted() {
-    UserService.getPublicContent().then(
-      (response:any) => {
-        this.content = response.data;
-      },
-      (error:any) => {
-        this.content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-      }
-    );
-  } 
+    // UserService.getPublicContent().then(
+    //   (response: any) => {
+    //     this.content = response.data;
+    //   },
+    //   (error: any) => {
+    //     this.content =
+    //       (error.response &&
+    //         error.response.data &&
+    //         error.response.data.message) ||
+    //       error.message ||
+    //       error.toString();
+    //   }
+    // );
+  }
 });
 </script>
 
 <style scoped>
+
 </style>

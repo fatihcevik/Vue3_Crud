@@ -3,25 +3,12 @@
     <div v-if="!submitted">
       <div class="form-group">
         <label for="title">Title</label>
-        <input
-          type="text"
-          class="form-control"
-          id="title"
-          required
-          v-model="tutorial.title"
-          name="title"
-        />
+        <input type="text" class="form-control" id="title" required v-model="tutorial.title" name="title" />
       </div>
 
       <div class="form-group">
         <label for="description">Description</label>
-        <input
-          class="form-control"
-          id="description"
-          required
-          v-model="tutorial.description"
-          name="description"
-        />
+        <input class="form-control" id="description" required v-model="tutorial.description" name="description" />
       </div>
 
       <button @click="saveTutorial" class="btn btn-success">Submit</button>
@@ -36,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import UserService from "@/services/user.service";
+import TutorialService from "@/services/tutorial.service";
 import type TutorialModel from "@/types/TutorialModel";
 import type ResponseDataModel from "@/types/ResponseDataModel";
 
@@ -60,7 +47,7 @@ export default defineComponent({
         description: this.tutorial.description,
       };
 
-      UserService.create(data)
+      TutorialService.create(data)
         .then((response: ResponseDataModel) => {
           this.tutorial.id = response.data.id;
           console.log(response.data);

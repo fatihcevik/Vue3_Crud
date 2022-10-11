@@ -20,10 +20,7 @@
 
         <div class="form-group">
           <button class="btn btn-primary btn-block" :disabled="loading">
-            <span
-              v-show="loading"
-              class="spinner-border spinner-border-sm"
-            ></span>
+            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
             <span>Login</span>
           </button>
         </div>
@@ -45,7 +42,7 @@ import AuthService from "@/services/auth.service";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
-export default defineComponent ({
+export default defineComponent({
   name: "Login",
   components: {
     Form,
@@ -59,7 +56,7 @@ export default defineComponent ({
     });
 
     return {
-      user : {
+      user: {
         username: "",
         password: ""
       },
@@ -71,15 +68,15 @@ export default defineComponent ({
 
   methods: {
 
-    handleLogin(user:any) {
+    handleLogin(user: any) {
       console.log(user);
       this.loading = true;
 
       AuthService.login(user)
-      .then(
-        () => {
-          this.$router.push("/profile");
-        })
+        .then(
+          () => {
+            this.$router.push("/profile");
+          })
         .catch((e: Error) => {
           console.log(e);
           this.loading = false;

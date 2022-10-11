@@ -1,24 +1,21 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <router-link to="/" class="navbar-brand">My Site</router-link>
+      <router-link to="/home" class="nav-link">
+        <font-awesome-icon icon="home" /> Home
+      </router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link to="/home" class="nav-link">
-            <font-awesome-icon icon="home" /> Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/tutorials" v-if="currentUser" class="nav-link">Tutorials</router-link>
+          <router-link to="/tutorials" v-if="showModeratorBoard" class="nav-link">Tutorials</router-link>
         </li>
         <li v-if="showAdminBoard || showModeratorBoard" class="nav-item">
-          <router-link to="/add" class="nav-link">Add Tutorial</router-link>
+          <router-link to="/tutorials/add" class="nav-link">Add Tutorial</router-link>
         </li>
       </div>
 
       <div v-if="showAdminBoard" class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/manageusers" class="nav-link">
+          <router-link to="/auth/manageusers" class="nav-link">
             <font-awesome-icon icon="user-plus" /> Manage Users
           </router-link>
         </li>
@@ -39,12 +36,12 @@
 
       <div v-if="currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/profile" class="nav-link">
+          <router-link to="/users/profile" class="nav-link">
             <font-awesome-icon icon="user" />
             {{ currentUser.username }}
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="isLoggedIn">
           <a class="nav-link" @click.prevent="logOut">
             <font-awesome-icon icon="sign-out-alt" /> LogOut
           </a>
@@ -79,11 +76,22 @@ export default defineComponent({
     currentUser() {
       return this.$store.state.auth.user;
     },
+    isLoggedIn() {
+      if (this.currentUser && this.currentUser['roles']) {
+        if (
+          this.currentUser['roles'].includes('ROLE_USER') ||
+          this.currentUser['roles'].includes('ROLE_ADMIN') ||
+          this.currentUser['roles'].includes('ROLE_MODERATOR')) {
+          console.log("dfddddd");
+          return true;
+        }
+      }
+      return false;
+    },
     showAdminBoard() {
       if (this.currentUser && this.currentUser['roles']) {
         return this.currentUser['roles'].includes('ROLE_ADMIN');
       }
-
       return false;
     },
     showModeratorBoard() {

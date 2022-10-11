@@ -7,8 +7,8 @@
         </header>
         <p>
             <strong>Token:</strong>
-            {{currentUser.accessToken.substring(0, 20)}} ...
-            {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}
+            {{currentUser?.accessToken?.substring(0, 20)}} ...
+            {{currentUser?.accessToken?.substr(currentUser.accessToken.length - 20)}}
         </p>
         <p>
             <strong>Id:</strong>
@@ -28,7 +28,6 @@
 <script lang="ts">
 
 import { defineComponent } from "vue";
-import AuthService from "../services/auth.service";
 export default defineComponent({
     name: "Profile",
     data() {
